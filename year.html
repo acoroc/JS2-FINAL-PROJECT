@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Simple Interest Calculator</title>
+    <style>
+        /* Core Reset & Elegant Backdrop Theme */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0f172a; /* Deep elegant dark tone matching storefront */
+            color: #334155;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* Glassmorphism/Premium Card Container */
+        .calculator-card {
+            background-color: #ffffff;
+            max-width: 420px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.25);
+        }
+        
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+        
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            background-color: #f8fafc;
+            color: #0f172a;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+        
+        /* Action Buttons Structure */
+        .btn-group {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        button, .back-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        
+        #calculateBtn {
+            background-color: #10b981; /* Premium Emerald Accent */
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+        }
+        
+        #calculateBtn:hover {
+            background-color: #059669;
+        }
+        
+        #calculateBtn:active {
+            transform: scale(0.98);
+        }
+        
+        .back-btn {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #475569;
+        }
+        
+        .back-btn:hover {
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        
+        /* Styled Output Display Panel */
+        #result {
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            line-height: 1.6;
+            display: none; /* Hidden until calculated */
+        }
+        
+        .result-success {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+        
+        .result-error {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+        
+        .result-highlight {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-card">
+        <h2>Interest Calculator <span style="color:#0284c7;">10%</span></h2>
+        
+        <label for="principal">Enter Principal Amount</label>
+        <input type="number" id="principal" placeholder="e.g. 1000" min="0">
+        
+        <label for="years">Number of Years</label>
+        <input type="number" id="years" placeholder="e.g. 3" min="1">
+        
+        <div class="btn-group">
+            <button id="calculateBtn">Calculate Statement</button>
+            
+            <a href="index.html" class="back-btn">Return to Shop</a>
+        </div>
+        
+        <div id="result"></div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const button = document.getElementById("calculateBtn");
+            const resultDiv = document.getElementById("result");
+            
+            button.addEventListener("click", function() {
+                const principal = parseFloat(document.getElementById("principal").value);
+                const years = parseInt(document.getElementById("years").value);
+                const rate = 10; // Fixed 10% per year
+                
+                // Show result box
+                resultDiv.style.display = "block";
+                
+                if (isNaN(principal) || isNaN(years) || principal <= 0 || years <= 0) {
+                    resultDiv.className = "result-error";
+                    resultDiv.innerText = "Validation Error: Please enter valid positive numbers.";
+                    return;
+                }
+                
+                const totalAmount = principal * (1 + (rate / 100) * years);
+                const interest = totalAmount - principal;
+                
+                // Format with local standard currency separation separators
+                const formattedInterest = interest.toLocaleString('en-US', {minimumFractionDigits: 2});
+                const formattedTotal = totalAmount.toLocaleString('en-US', {minimumFractionDigits: 2});
+                
+                resultDiv.className = "result-success";
+                resultDiv.innerHTML = `
+                    <p>Accrued Interest: <span class="result-highlight">₱${formattedInterest}</span></p>
+                    <p>Total Balance (After ${years} yrs): <span class="result-highlight">₱${formattedTotal}</span></p>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>

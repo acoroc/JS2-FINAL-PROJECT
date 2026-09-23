@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Alex Tech Supply</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--NAV BAR-->
+    <nav class ="navbar">
+        <div class ="nav-container">
+            <a href="#" class ="nav-logo">Alex Tech Supply</a>
+            <ul class ="nav-links">
+                <li><a href="#">Shop</a></li>
+                <li><a href="gallery.html" class ="active">Gallery</a></li>
+                <li><a href="month.html">Monthly Interest Calculator</a></li>
+                <li><a href="year.html">Yearly Interest Calculator</a></li>
+                <li><a href="Bonus.html">Dollar to Peso</a></li>    
+            </ul>
+            <div class ="nav-cart">
+                <span class="cart-icon">🛒</span>
+                <span id="navCartBadge" class="cart-badge">0</span>    
+            </div>
+        </div>
+    </nav>
+    
+    <!--MAIN CONTENT-->
+    
+    <main class ="main-content">
+        <div class = "hero-section">
+            <h1>High Performanace Computer Hardware</h1>
+            <p>Equip your workspace with enterprise-grade components built for maximum efficiency and speed.</p>
+        </div>
+        
+        <div class = "shop-container">
+            <!--PRODUCT 1-->
+            <div class="product" data-name="Gaming Desktop" data-price="52779.00">
+                <div class="img-wrapper">
+                    <img class="product-img" src="images/DellOptiPlex.png" alt="Gaming Desktop" />
+                </div>
+                <h2>Dell OptiPlex PC, Core I7, 22'Monitor, 16G RAM, 512G SSD, ARGB</h2>
+                <p class="unit-price">₱52,779.00</p>
+                <div class="controls">
+                    <button class="change-qty decreaseBtn">-</button>
+                    <span class="quantity">0</span>
+                    <button class="change-qty increaseBtn">+</button>
+                </div>
+                <div class="total">
+                    Subtotal: <span>₱ <span class="totalPrice"> 0.00</span></span>
+                </div>
+                <button class="addToCartBtn">Add to Cart</button>
+            </div>
+            
+            <!--PRODUCT 2-->
+            <div class="product" data-name="Mechanical Keyboard w/Mouse" data-price="1495.00">
+                <div class="img-wrapper">
+                    <img class="product-img" src="images/mechanicalkeyboard.png" alt="Mechanical Keyboard" />
+                </div>
+                <h2>RAKK TANDOG PRO Mechanical Rainbow LED Wired Keyboard and Mouse Bundle</h2>
+                <p class="unit-price">₱1,495.00</p>
+                <div class="controls">
+                    <button class="change-qty decreaseBtn">-</button>
+                    <span class="quantity">0</span>
+                    <button class="change-qty increaseBtn">+</button>
+                </div>
+                <div class="total">
+                    Subtotal: <span>₱ <span class="totalPrice"> 0.00</span></span>
+                </div>
+                <button class="addToCartBtn">Add to Cart</button>
+            </div>
+            
+            <!--PRODUCT 3-->
+            
+            <div class="product" data-name="Gaming Mouse" data-price="4195.00">
+                <div class="img-wrapper">
+                    <img class="product-img" src="images/gamingmouse.png" alt="Gaming Mouse" />
+                </div>
+                <h2>Logitech G304 X Superlight Lightspeed Wireless Gaming Mouse</h2>
+                <p class="unit-price">₱4,195.00</p>
+                <div class="controls">
+                    <button class="change-qty decreaseBtn">-</button>
+                    <span class="quantity">0</span>
+                    <button class="change-qty increaseBtn">+</button>
+                </div>
+                <div class="total">
+                    Subtotal: <span>₱ <span class="totalPrice"> 0.00</span></span>
+                </div>
+                <button class="addToCartBtn">Add to Cart</button>
+            </div>
+        </div>
+        
+        <!--PROCEED TO PAYMENT-->
+        
+        <div class ="cart-summary-bar">
+            <h3>Items Selected:<span id ="cartCount">0</span></h3>
+            <button id ="globalCheckoutBtn" disabled>Proceed to payment</button>
+        </div>
+        
+        <!--LIGHTBOX-->
+        
+        <div class="popup" id="popup">
+            <span class="close-btn" id="close-btn">&times;</span>
+            <img id="popup-img">
+            <p class="caption" id="popup-caption"></p>
+        </div>
+        
+        
+        
+        <!--TOAST NOTIFICATION-->
+        <div id ="toast" class ="toast">Notification Message</div>
+        
+        <!--FOOTER-->
+        
+        <footer class ="footer">
+            <div class ="footer-container">
+                <p>&copy; 2026 Aex Tech Supply. All Rights Reserved.</p>
+                <p>By: Alex Corocoto</p>
+            </div>
+        </footer>
+        
+        
+    </main>
+    
+    
+	<script src="script.js"></script>
+</body>
+</html>

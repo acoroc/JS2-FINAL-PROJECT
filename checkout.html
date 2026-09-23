@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Invoice Statement</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="summary-body">
+    <div class="summary-box">
+        <h1>Order Invoice Summary</h1>
+        <div id="cartItemsList">
+            <p style="text-align: center; color: #64748b;">No items have been assigned to checkout.</p>
+        </div>
+        <div class="summary-total-container">
+            <p class="summary-total">Total Balance Due: <strong>₱<span id="grandTotal">0.00</span></strong></p>
+        </div>
+        <div class="btn-group">
+            <button class="btn pay-btn" id="payBtn">Confirm Order & Pay</button>
+            <button class="btn back-btn" id="backBtn">Return to Shop</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const rawCartData = params.get('cart');
+            const cart = rawCartData ? JSON.parse(decodeURIComponent(rawCartData)) : [];
+            const listContainer = document.getElementById('cartItemsList');
+            const payBtn = document.getElementById('payBtn');
+            let grandTotal = 0;
+            let totalQty = 0;
+
+            cart.forEach(item => {
+                totalQty += item.qty;
+            });
+
+            if (cart.length > 0 && totalQty > 0) {
+                listContainer.innerHTML = "";
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'summary-item';
+                    itemElement.innerHTML = `
+                        <div class="item-meta">
+                            <span class="item-title">${item.name}</span>
+                            <span class="item-qty">Qty: ${item.qty}</span>
+                        </div>
+                        <span class="item-price">₱${parseFloat(item.total).toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+                    `;
+                    listContainer.appendChild(itemElement);
+                    grandTotal += parseFloat(item.total);
+                });
+                document.getElementById('grandTotal').textContent = grandTotal.toLocaleString('en-US', {minimumFractionDigits: 2});
+            }
+
+            document.getElementById('backBtn').addEventListener('click', () => {
+                window.location.href = "index.html";
+            });
+
+            payBtn.addEventListener('click', () => {
+                alert(`Transaction approved.\nProcessing settlement of ₱${grandTotal.toLocaleString('en-US', {minimumFractionDigits: 2})}...`);
+                window.location.href = "index.html";
+            });
+        });
+    </script>
+</body>
+</html>
